@@ -43,6 +43,7 @@ function createNavItem(sectionElement) {
 	// add text content from the data-nav in the section
 	a.textContent = sectionElement.dataset.nav;
 	a.href = `#${sectionElement.id}`;
+	a.id = `${sectionElement.id}_link`
 	a.addEventListener('click', scrollToSection(sectionElement));
 	li.appendChild(a);
 	return li;
