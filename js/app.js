@@ -5,13 +5,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	// nav UL
 	const nav = document.getElementById('navbar__list');
 	const allSections = document.querySelectorAll('section');
+	let currentActiveSection = allSections[0];
+	const observer = createObserver(callback);
 	allSections.forEach((section) => {
+		observer.observe(section);
 		const li = createNavItem(section);
 		nav.appendChild(li);
 	});
 	scrollToTopButton.addEventListener('click', scrollToTheTop);
+	function callback(entries) {
+		entries.forEach((entry) => {
+			const { target } = entry;
+			currentActiveSection.classList.remove('your-active-class');
+			target.classList.add('your-active-class');
+			currentActiveSection = target ;
+
+		});
+	}
 });
 
+function createObserver(callback) {
+	const observer = new IntersectionObserver(callback, {
+		root: null,
+		threshold:0.7
+	});
+	return observer;
+}
 /**
  * create anchor element and li tag based on the parameter info
  * @param sectionElement {HTMLElement}
