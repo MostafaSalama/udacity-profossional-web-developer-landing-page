@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let currentActiveSection = allSections[0];
 	// active link of the current active section
 	// to add active class to it
-	let activeLink = null ;
+	let activeLink = null;
 	// create an observer that will tell us
 	// if the section in the viewport or not
 	// API https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
@@ -35,27 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
 				const { target } = entry;
 				currentActiveSection.classList.remove('your-active-class');
 				target.classList.add('your-active-class');
-				currentActiveSection = target ;
+				currentActiveSection = target;
 				if (activeLink) {
 					// remove the active link class from the current active link
 					activeLink.classList.remove('active-link');
 					// change the current active link
 					activeLink = document.getElementById(`${target.id}_link`);
 					// add the class to the new active link
-					activeLink.classList.add('active-link')
-				}
-				else {
+					activeLink.classList.add('active-link');
+				} else {
 					// get the anchor tag based on the active section
 					activeLink = document.getElementById(`${target.id}_link`);
-					activeLink.classList.add('active-link')
+					activeLink.classList.add('active-link');
 				}
-
-			}
-			else {
+			} else {
 				// remove the active link class if no section in the viewport
-				activeLink.classList.remove('active-link')
+				activeLink.classList.remove('active-link');
 			}
-
 		});
 	}
 });
@@ -65,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function createObserver(callback) {
 	const observer = new IntersectionObserver(callback, {
 		root: null,
-		threshold:0.7
+		threshold: 0.7,
 	});
 	return observer;
 }
@@ -81,7 +77,7 @@ function createNavItem(sectionElement) {
 	// add text content from the data-nav in the section
 	a.textContent = sectionElement.dataset.nav;
 	a.href = `#${sectionElement.id}`;
-	a.id = `${sectionElement.id}_link`
+	a.id = `${sectionElement.id}_link`;
 	a.addEventListener('click', scrollToSection(sectionElement));
 	li.appendChild(a);
 	return li;
