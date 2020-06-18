@@ -4,16 +4,30 @@ document.addEventListener('DOMContentLoaded', () => {
 	const scrollToTopButton = document.getElementById('to_top_button');
 	// nav UL
 	const nav = document.getElementById('navbar__list');
+	// get all the sections
 	const allSections = document.querySelectorAll('section');
+	// this will present the current active
+	// section and have initial value of the first section
 	let currentActiveSection = allSections[0];
+	// active link of the current active section
+	// to add active class to it
 	let activeLink = null ;
+	// create an observer that will tell us
+	// if the section in the viewport or not
+	// API https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 	const observer = createObserver(callback);
+	// observe all sections
 	allSections.forEach((section) => {
 		observer.observe(section);
+		// create menu item for each section
 		const li = createNavItem(section);
+		// append it to the menu
 		nav.appendChild(li);
 	});
+	// when scroll button is clicked it will scroll to the top of the page
 	scrollToTopButton.addEventListener('click', scrollToTheTop);
+
+	// this callback is used by the observer
 	function callback(entries) {
 		entries.forEach((entry) => {
 			// if element is in viewport
@@ -23,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				target.classList.add('your-active-class');
 				currentActiveSection = target ;
 				if (activeLink) {
-					console.log(target)
 					// remove the active link class from the current active link
 					activeLink.classList.remove('active-link');
 					// change the current active link
@@ -34,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				else {
 					// get the anchor tag based on the active section
 					activeLink = document.getElementById(`${target.id}_link`);
-					console.log(activeLink)
 					activeLink.classList.add('active-link')
 				}
 
@@ -48,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
+// this function will create observer used to look
+// at different elements and see if it in the viewport
 function createObserver(callback) {
 	const observer = new IntersectionObserver(callback, {
 		root: null,
