@@ -5,8 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	scrollToTopButton.addEventListener('click', scrollToTheTop);
 });
 
-
-
+/**
+ * create anchor element and li tag based on the parameter info
+ * @param sectionElement {HTMLElement}
+ * @returns {HTMLLIElement}
+ */
+function createNavItem(sectionElement) {
+	const li = document.createElement('li');
+	const a = document.createElement('a');
+	a.classList.add('menu__link');
+	// add text content from the data-nav in the section
+	a.textContent = sectionElement.dataset.nav;
+	a.href = `#${sectionElement.id}`;
+	a.addEventListener('click', scrollToSection(sectionElement));
+	li.appendChild(a);
+	return li;
+}
 /**
  * scroll to the specified element and return a function
  * to be used as the listener for the anchor tag
@@ -14,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * @returns {function(...[*]=)}
  */
 function scrollToSection(section) {
-	return function () {
+	return function (ev) {
+		ev.preventDefault();
 		window.scrollTo({
 			behavior: 'smooth',
 			top: section.offsetTop,
