@@ -1,57 +1,18 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
+// event fired when the dom is loaded and parsed
+document.addEventListener('DOMContentLoaded', () => {
+	// this button will be used to scroll to the top of the page
+	const scrollToTopButton = document.getElementById('to_top_button');
+	scrollToTopButton.addEventListener('click', scrollToTheTop);
+});
 
 /**
- * Define Global Variables
- * 
-*/
-
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
-
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
-
+ * scroll to the top of the page
+ */
+function scrollToTheTop() {
+    console.log('clicked')
+	window.scrollTo({
+		behavior: 'smooth',
+		top: 0,
+		left: 0,
+	});
+}
