@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const nav = document.getElementById('navbar__list');
 	const allSections = document.querySelectorAll('section');
 	let currentActiveSection = allSections[0];
+	let activeLink = null ;
 	const observer = createObserver(callback);
 	allSections.forEach((section) => {
 		observer.observe(section);
@@ -15,10 +16,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	scrollToTopButton.addEventListener('click', scrollToTheTop);
 	function callback(entries) {
 		entries.forEach((entry) => {
-			const { target } = entry;
-			currentActiveSection.classList.remove('your-active-class');
-			target.classList.add('your-active-class');
-			currentActiveSection = target ;
+			// if element is in viewport
+			if (entry.isIntersecting) {
+				const { target } = entry;
+				currentActiveSection.classList.remove('your-active-class');
+				target.classList.add('your-active-class');
+				currentActiveSection = target ;
+				if (activeLink) {
+					console.log(target)
+					// remove the active link class from the current active link
+					activeLink.classList.remove('active-link');
+					// change the current active link
+					activeLink = document.getElementById(`${target.id}_link`);
+					// add the class to the new active link
+					activeLink.classList.add('active-link')
+				}
+				else {
+					// get the anchor tag based on the active section
+					activeLink = document.getElementById(`${target.id}_link`);
+					console.log(activeLink)
+					activeLink.classList.add('active-link')
+				}
+
+			}
+			else {
+				// remove the active link class if no section in the viewport
+				activeLink.classList.remove('active-link')
+			}
 
 		});
 	}
