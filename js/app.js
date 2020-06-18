@@ -2,6 +2,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 	// this button will be used to scroll to the top of the page
 	const scrollToTopButton = document.getElementById('to_top_button');
+	// nav UL
+	const nav = document.getElementById('navbar__list');
+	const allSections = document.querySelectorAll('section');
+	allSections.forEach((section) => {
+		const li = createNavItem(section);
+		nav.appendChild(li);
+	});
 	scrollToTopButton.addEventListener('click', scrollToTheTop);
 });
 
