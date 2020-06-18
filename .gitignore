@@ -1,0 +1,7 @@
+# cache files
+/.cache
+# dist folder
+/dist
+
+# IDE FILES
+/.idea
